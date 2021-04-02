@@ -14,22 +14,21 @@ const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-// Set static folder
+// Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
 const botName = 'Bot!';
 
-// Run when client connects
 io.on('connection', socket => {
   socket.on('joinRoom', ({ username, room }) => {
     const user = userJoin(socket.id, username, room);
 
     socket.join(user.room);
 
-    // Welcome current user
+    // powitanie
     socket.emit('message', formatMessage(botName, 'Hello, have a nice day!'));
 
-    // Broadcast when a user connects
+    // Broadcast powitanie
     socket.broadcast
       .to(user.room)
       .emit(
@@ -37,21 +36,21 @@ io.on('connection', socket => {
         formatMessage(botName, `${user.username} has joined`)
       );
 
-    // Send users and room info
+    // wysyłanie info o pokojach i uzyt.
     io.to(user.room).emit('roomUsers', {
       room: user.room,
       users: getRoomUsers(user.room)
     });
   });
 
-  // Listen for chatMessage
+  
   socket.on('chatMessage', msg => {
     const user = getCurrentUser(socket.id);
 
     io.to(user.room).emit('message', formatMessage(user.username, msg));
   });
 
-  // Runs when client disconnects
+  // rozłączenie wiadomość
   socket.on('disconnect', () => {
     const user = userLeave(socket.id);
 
@@ -61,7 +60,6 @@ io.on('connection', socket => {
         formatMessage(botName, `${user.username} has left`)
       );
 
-      // Send users and room info
       io.to(user.room).emit('roomUsers', {
         room: user.room,
         users: getRoomUsers(user.room)
