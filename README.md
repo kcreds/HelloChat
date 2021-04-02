@@ -6,9 +6,7 @@
 
 ![2](https://user-images.githubusercontent.com/80978853/113436749-90bc8580-93e5-11eb-95bc-f0e8229d1401.PNG)
 
-<center>
-
-![3](https://user-images.githubusercontent.com/80978853/113436744-8ef2c200-93e5-11eb-916f-87fe58d4574f.PNG) </center>
+![3](https://user-images.githubusercontent.com/80978853/113436744-8ef2c200-93e5-11eb-916f-87fe58d4574f.PNG)
 
 ![4](https://user-images.githubusercontent.com/80978853/113436746-9023ef00-93e5-11eb-9038-b5a6d42c4056.PNG)
 
