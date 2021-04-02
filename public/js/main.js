@@ -3,36 +3,35 @@ const chatMessages = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
 const userList = document.getElementById('users');
 
-// Get username and room from URL
+// nazwy uzyt i pokojow
 const { username, room } = Qs.parse(location.search, {
   ignoreQueryPrefix: true,
 });
 
 const socket = io();
 
-// Join chatroom
+// doloczanie
 socket.emit('joinRoom', { username, room });
 
-// Get room and users
 socket.on('roomUsers', ({ room, users }) => {
   outputRoomName(room);
   outputUsers(users);
 });
 
-// Message from server
+// wiadomosc z servera
 socket.on('message', (message) => {
   console.log(message);
   outputMessage(message);
 
-  // Scroll down
+  // scroll
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
-// Message submit
+// wysyłanie wiad
 chatForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  // Get message text
+
   let msg = e.target.elements.msg.value;
 
   msg = msg.trim();
@@ -41,15 +40,14 @@ chatForm.addEventListener('submit', (e) => {
     return false;
   }
 
-  // Emit message to server
   socket.emit('chatMessage', msg);
 
-  // Clear input
+  // czyszczenie
   e.target.elements.msg.value = '';
   e.target.elements.msg.focus();
 });
 
-// Output message to DOM
+// wysylanie do  DOM
 function outputMessage(message) {
   const div = document.createElement('div');
   div.classList.add('message');
@@ -65,12 +63,12 @@ function outputMessage(message) {
   document.querySelector('.chat-messages').appendChild(div);
 }
 
-// Add room name to DOM
+// pokoje DOM
 function outputRoomName(room) {
   roomName.innerText = room;
 }
 
-// Add users to DOM
+// uzytk. DOM
 function outputUsers(users) {
   userList.innerHTML = '';
   users.forEach((user) => {
@@ -80,7 +78,7 @@ function outputUsers(users) {
   });
 }
 
-//Prompt the user before leave chat room
+//wiadomosc do podwierdzenia przy wyjsciu
 document.getElementById('leave-btn').addEventListener('click', () => {
   const leaveRoom = confirm('Are you sure?');
   if (leaveRoom) {
