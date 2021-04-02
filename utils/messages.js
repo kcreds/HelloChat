@@ -1,5 +1,5 @@
 const moment = require('moment');
-
+//format wyswietlania wiadomosci
 function formatMessage(username, text) {
   return {
     username,
