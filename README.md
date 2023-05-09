@@ -1,5 +1,5 @@
 # HelloChat!
-<p>'HelloChat!' is a simple realtime chat app using Node, express & websockets</p>
+<p>'HelloChat!' is a simple realtime chat app using Node.js, Express.js & WebSocket</p>
 <h1><b>Screenshots:camera:<b></h1>
 <p align="center">
   
